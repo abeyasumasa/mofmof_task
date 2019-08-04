@@ -1,4 +1,5 @@
 class RentalsController < ApplicationController
+
   def index
     @rentals = Rental.all
   end
@@ -8,11 +9,17 @@ class RentalsController < ApplicationController
   end
 
   def create
-    Rental.create(rental_params)
-    redirect_to new_rental_path
+    @rental = Rental.new(rental_params)
+    binding.pry
+    if @rental.save
+      redirect_to rentals_path, notice: "ブログを作成しました！"
+    else
+      render :new
+    end
   end
 
   def show
+    @rental = Rental.find(params[:id])
   end
 
   private
@@ -20,4 +27,5 @@ class RentalsController < ApplicationController
   def rental_params
     params.require(:rental).permit(:property_name, :rent, :adress, :age, :note)
   end
+
 end
