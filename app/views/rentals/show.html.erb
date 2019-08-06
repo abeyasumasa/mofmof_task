@@ -3,3 +3,6 @@
 <p>住所: <%= @rental.adress %></p>
 <p>築年数: <%= @rental.age %></p>
 <p>備考: <%= @rental.note %></p>
+
+<%= link_to "編集", edit_rental_path(@rental.id),data: { confirm: '本当に編集していいですか？' }  %>
+<%= link_to "戻る", rentals_path %>
