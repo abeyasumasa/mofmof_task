@@ -1,8 +1,26 @@
-<p>物件名: <%= @rental.property_name %></p>
-<p>賃貸: <%= @rental.rent %></p>
-<p>住所: <%= @rental.adress %></p>
-<p>築年数: <%= @rental.age %></p>
-<p>備考: <%= @rental.note %></p>
+<h1>閲覧</h1>
+
+<div class ="field">
+  <p>物件名: <%= @rental.property_name %></p>
+  <p>賃貸: <%= @rental.rent %>円</p>
+  <p>住所: <%= @rental.adress %></p>
+  <p>築年数: <%= @rental.age %>年</p>
+  <p>備考: <%= @rental.note %></p>
+</div>
+
+<h3 class="station"> 最寄駅1</h3>
+<div class ="field">
+   <p>路線名: <%= @rental.stations.first.route_name %></p>
+   <p>駅名: <%= @rental.stations.first.station %></p>
+  <p>徒歩分数: <%= @rental.stations.first.walking_minute %>分</p>
+</div>
+
+<h3 class="station"> 最寄駅2</h3>
+<div class ="field">
+  <p>路線名: <%= @rental.stations.second.route_name %></p>
+  <p>駅名: <%= @rental.stations.second.station %></p>
+   <p>徒歩分数: <%= @rental.stations.second.walking_minute %>分</p>
+</div>
 
 <%= link_to "編集", edit_rental_path(@rental.id),data: { confirm: '本当に編集していいですか？' }  %>
 <%= link_to "戻る", rentals_path %>

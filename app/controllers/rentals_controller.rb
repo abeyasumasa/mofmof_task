@@ -7,6 +7,7 @@ class RentalsController < ApplicationController
 
   def new
     @rental = Rental.new
+    2.times {@rental.stations.build}
   end
 
   def create
@@ -14,7 +15,7 @@ class RentalsController < ApplicationController
     if @rental.save
       redirect_to rentals_path
     else
-      render :new
+      render 'new'
     end
   end
 
@@ -25,7 +26,8 @@ class RentalsController < ApplicationController
   end
 
   def update
-    if @rental.update(rental_params)
+    binding.pry
+    if @rental.update(updete_rental_params)
       redirect_to rentals_path
     else
       render :edit
@@ -36,14 +38,21 @@ class RentalsController < ApplicationController
     @rental.destroy
     redirect_to rentals_path
   end
-  private
 
+  private
   def rental_params
-    params.require(:rental).permit(:property_name, :rent, :adress, :age, :note)
+    params.require(:rental).permit(
+      :property_name, :rent, :adress, :age, :note,
+      stations_attributes: [ :rental_id, :route_name, :station, :walking_minute])
+  end
+
+  def updete_rental_params
+    params.require(:rental).permit(
+      :property_name, :rent, :adress, :age, :note,
+      stations_attributes: [ :rental_id, :route_name, :station, :walking_minute,:_destroy, :id])
   end
 
   def set_rental
     @rental = Rental.find(params[:id])
   end
-
 end
