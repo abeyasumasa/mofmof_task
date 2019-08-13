@@ -1,0 +1,13 @@
+<div class="nested-fields" >　
+  <% x = 1 %>
+  <h3> 最寄駅<%= x %></h3>
+     <p><%= f.label :"路線名" %></p>
+     <%= f.text_field :route_name %>
+
+     <p><%= f.label :"駅名" %></p>
+     <%= f.text_field :station %>
+
+     <p><%= f.label :"徒歩分数" %></p>
+     <%= f.text_field :walking_minute %>分<br>
+     <%= link_to_remove_association "remove station", f %>
+ </div>

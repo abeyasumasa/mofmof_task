@@ -26,20 +26,16 @@
 
      <p><%= form.label :"備考" %><p>
      <%= form.text_field :note %><br>
+  </div>
 
-  <% x = 1 %>
-  <%= form.fields_for :stations do |station| %>
-    <h3> 最寄駅<%= x %></h3>
-         <p><%= station.label :"路線名" %></p>
-         <%= station.text_field :route_name %>
-
-         <p><%= station.label :"駅名" %></p>
-         <%= station.text_field :station %>
-
-         <p><%= station.label :"徒歩分数" %></p>
-         <%= station.text_field :walking_minute %>分<br>
-         <% x +=1 %>
-  <% end %>
+  <div class="stations">
+     <%= form.fields_for :stations  do |f| %>
+       <%= render "station_fields", f: f %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "駅を追加", form, :stations %>
+      </div>
+  </div>
 
   <div class="actions">
     <%= form.submit "登録する" %>
